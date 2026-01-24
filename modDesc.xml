@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="80">
+    <title>
+        <en>Income Mod</en>
+        <de>Einkommens-Mod</de>
+        <fr>Mod de Revenu</fr>
+        <es>Mod de Ingresos</es>
+    </title>
+    <description>
+        <en><![CDATA[
+Adds configurable hourly or daily income to your farm.
+
+Features:
+• Hourly or daily income
+• Three difficulty levels (Easy/Normal/Hard)
+• Custom income amount
+• Professional notifications
+• Debug logging levels
+• Multiplayer compatible
+• Settings menu in pause menu
+• Save/Load settings
+• Localized for multiple languages
+
+Perfect for new farms or multiplayer servers!
+]]></en>
+        <de><![CDATA[
+Fügt konfigurierbares stündliches oder tägliches Einkommen zu Ihrer Farm hinzu.
+
+Funktionen:
+• Stündliches oder tägliches Einkommen
+• Drei Schwierigkeitsgrade (Einfach/Normal/Schwer)
+• Benutzerdefinierter Einkommensbetrag
+• Professionelle Benachrichtigungen
+• Debug-Logging-Level
+• Multiplayer-kompatibel
+• Einstellungsmenü im Pausenmenü
+• Einstellungen speichern/laden
+• Für mehrere Sprachen lokalisiert
+
+Perfekt für neue Farmen oder Multiplayer-Server!
+]]></de>
+        <fr><![CDATA[
+Ajoute un revenu horaire ou quotidien configurable à votre ferme.
+
+Fonctionnalités :
+• Revenu horaire ou quotidien
+• Trois niveaux de difficulté (Facile/Normal/Difficile)
+• Montant de revenu personnalisé
+• Notifications professionnelles
+• Niveau de debug
+• Compatible multijoueur
+• Menu des paramètres dans le menu pause
+• Sauvegarde/chargement des paramètres
+• Localisé pour plusieurs langues
+
+Parfait pour les nouvelles fermes ou les serveurs multijoueurs !
+]]></fr>
+        <es><![CDATA[
+Añade ingresos horarios o diarios configurables a tu granja.
+
+Características:
+• Ingresos horarios o diarios
+• Tres niveles de dificultad (Fácil/Normal/Difícil)
+• Monto de ingresos personalizado
+• Notificaciones profesionales
+• Niveles de depuración
+• Compatible con multijugador
+• Menú de configuración en el menú de pausa
+• Guardar/cargar configuración
+• Localizado para varios idiomas
+
+¡Perfecto para nuevas granjas o servidores multijugador!
+]]></es>
+    </description>
+    
+    <author>
+        <en>TisonK</en>
+    </author>
+    
+    <version>1.1.5.0</version>
+    <multiplayer supported="true"/>
+    
+    <iconFilename>icon_FS22_IncomeMod.dds</iconFilename>
+    
+    <l10n>
+        <!-- Existing localization plus new keys for v1.1.0.0 -->
+        <text name="income_mod_notification_title">
+            <en>Income Received</en>
+            <nl>Inkomen ontvangen</nl>
+            <de>Einkommen erhalten</de>
+            <fr>Revenu reçu</fr>
+            <es>Ingreso recibido</es>
+        </text>
+        <text name="income_mod_type_hourly">
+            <en>hourly income</en>
+            <nl>uurlijk inkomen</nl>
+            <de>stündliches Einkommen</de>
+            <fr>revenu horaire</fr>
+            <es>ingreso por hora</es>
+        </text>
+        <text name="income_mod_type_daily">
+            <en>daily income</en>
+            <nl>dagelijks inkomen</nl>
+            <de>tägliches Einkommen</de>
+            <fr>revenu quotidien</fr>
+            <es>ingreso diario</es>
+        </text>
+        <text name="income_mod_type_test">
+            <en>test income</en>
+            <nl>testinkomen</nl>
+            <de>Test-Einkommen</de>
+            <fr>revenu test</fr>
+            <es>ingreso de prueba</es>
+        </text>
+        <text name="income_mod_message">
+            <en>You have received your %s of %s</en>
+            <nl>Je hebt je %s van %s ontvangen</nl>
+            <de>Sie haben Ihr %s in Höhe von %s erhalten</de>
+            <fr>Vous avez reçu votre %s de %s</fr>
+            <es>Has recibido tu %s de %s</es>
+        </text>
+        <text name="income_mod_welcome_message">
+            <en>You started your work, you will get paid from now on!</en>
+            <nl>Je bent aan je werk begonnen, je wordt vanaf nu betaald!</nl>
+            <de>Sie haben Ihre Arbeit begonnen, Sie werden ab jetzt bezahlt!</de>
+            <fr>Vous avez commencé votre travail, vous serez payé à partir de maintenant !</fr>
+            <es>¡Has comenzado tu trabajo, recibirás pago a partir de ahora!</es>
+        </text>
+        <text name="income_mod_help_message">
+            <en>To get help, type 'income' in the console.</en>
+            <nl>Typ 'income' in de console voor hulp.</nl>
+            <de>Geben Sie „income“ in der Konsole ein, um Hilfe zu erhalten.</de>
+            <fr>Tapez « income » dans la console pour obtenir de l'aide.</fr>
+            <es>Escribe « income » en la consola para obtener ayuda.</es>
+        </text>
+
+        <!-- Settings menu -->
+        <text name="income_mod_category">
+            <en>Income Mod</en>
+            <nl>Inkomsten Mod</nl>
+            <de>Einkommens-Mod</de>
+            <fr>Mod de Revenu</fr>
+            <es>Mod de Ingresos</es>
+        </text>
+        <text name="income_mod_enabled">
+            <en>Enable Income</en>
+            <nl>Inkomen inschakelen</nl>
+            <de>Einkommen aktivieren</de>
+            <fr>Activer le revenu</fr>
+            <es>Activar ingresos</es>
+        </text>
+        <text name="income_mod_mode">
+            <en>Income Mode</en>
+            <nl>Inkomensmodus</nl>
+            <de>Einkommensmodus</de>
+            <fr>Mode de revenu</fr>
+            <es>Modo de ingresos</es>
+        </text>
+        <text name="income_mod_mode_hourly">
+            <en>Hourly</en>
+            <nl>Uurlijk</nl>
+            <de>Stündlich</de>
+            <fr>Horaire</fr>
+            <es>Por hora</es>
+        </text>
+        <text name="income_mod_mode_daily">
+            <en>Daily</en>
+            <nl>Dagelijks</nl>
+            <de>Täglich</de>
+            <fr>Quotidien</fr>
+            <es>Diario</es>
+        </text>
+        <text name="income_mod_difficulty">
+            <en>Income Level</en>
+            <nl>Inkomensniveau</nl>
+            <de>Einkommensstufe</de>
+            <fr>Niveau de revenu</fr>
+            <es>Nivel de ingresos</es>
+        </text>
+        <text name="income_mod_difficulty_easy">
+            <en>Easy</en>
+            <nl>Makkelijk</nl>
+            <de>Einfach</de>
+            <fr>Facile</fr>
+            <es>Fácil</es>
+        </text>
+        <text name="income_mod_difficulty_normal">
+            <en>Normal</en>
+            <nl>Normaal</nl>
+            <de>Normal</de>
+            <fr>Normal</fr>
+            <es>Normal</es>
+        </text>
+        <text name="income_mod_difficulty_hard">
+            <en>Hard</en>
+            <nl>Moeilijk</nl>
+            <de>Schwer</de>
+            <fr>Difficile</fr>
+            <es>Difícil</es>
+        </text>
+        <text name="income_mod_notifications">
+            <en>Show Notifications</en>
+            <nl>Toon meldingen</nl>
+            <de>Benachrichtigungen anzeigen</de>
+            <fr>Afficher les notifications</fr>
+            <es>Mostrar notificaciones</es>
+        </text>
+        <text name="income_mod_debug">
+            <en>Debug Mode</en>
+            <nl>Debug-modus</nl>
+            <de>Debug-Modus</de>
+            <fr>Mode debug</fr>
+            <es>Modo depuración</es>
+        </text>
+        <text name="income_mod_useCustomAmount">
+            <en>Use Custom Income Amount</en>
+            <nl>Gebruik aangepast inkomen</nl>
+            <de>Benutzerdefinierten Einkommensbetrag verwenden</de>
+            <fr>Utiliser un montant de revenu personnalisé</fr>
+            <es>Usar cantidad de ingresos personalizada</es>
+        </text>
+        <text name="income_mod_console_help">
+    <en><![CDATA[
+====== Income Mod Commands v1.1.5.0 ======
+ - income status -> Show current settings
+ - income enable -> Enable income
+ - income disable -> Disable income
+ - income mode [hourly|daily] -> Set income mode
+ - income difficulty [easy|normal|hard] -> Set difficulty
+ - income debug -> Toggle debug mode
+ - income test -> Test payment (give money now)
+ - income reload -> Reload settings from file
+ - income custom [amount] -> Set custom income amount
+================================
+    ]]></en>
+    <nl><![CDATA[
+====== Income Mod Commands v1.1.5.0 ======
+ - income status -> Laat huidige instellingen zien
+ - income enable -> Zet inkomen aan
+ - income disable -> Zet inkomen uit
+ - income mode [hourly|daily] -> Verander inkomensmodus
+ - income difficulty [easy|normal|hard] -> Verander moeilijkheidsgraad
+ - income debug -> Schakel debug-modus
+ - income test -> Test betaling (geef direct geld)
+ - income reload -> Herlaad instellingen vanuit bestand
+ - income custom [bedrag] -> Stel aangepast inkomen in
+================================
+    ]]></nl>
+    <de><![CDATA[
+====== Einkommens-Mod Befehle v1.1.5.0 ======
+ - income status -> Aktuelle Einstellungen anzeigen
+ - income enable -> Einkommen aktivieren
+ - income disable -> Einkommen deaktivieren
+ - income mode [hourly|daily] -> Einkommensmodus setzen
+ - income difficulty [easy|normal|hard] -> Schwierigkeit festlegen
+ - income debug -> Debug-Modus umschalten
+ - income test -> Zahlung testen (Geld sofort geben)
+ - income reload -> Einstellungen aus Datei neu laden
+ - income custom [Betrag] -> Benutzerdefinierten Betrag einstellen
+================================
+    ]]></de>
+    <fr><![CDATA[
+====== Commandes du mod de revenu v1.1.5.0 ======
+ - income status -> Afficher les paramètres actuels
+ - income enable -> Activer le revenu
+ - income disable -> Désactiver le revenu
+ - income mode [hourly|daily] -> Définir le mode de revenu
+ - income difficulty [easy|normal|hard] -> Définir la difficulté
+ - income debug -> Basculer le mode debug
+ - income test -> Tester le paiement (donner l'argent maintenant)
+ - income reload -> Recharger les paramètres depuis le fichier
+ - income custom [montant] -> Définir le revenu personnalisé
+================================
+    ]]></fr>
+    <es><![CDATA[
+====== Comandos del mod de ingresos v1.1.5.0 ======
+ - income status -> Mostrar la configuración actual
+ - income enable -> Activar ingresos
+ - income disable -> Desactivar ingresos
+ - income mode [hourly|daily] -> Establecer el modo de ingresos
+ - income difficulty [easy|normal|hard] -> Establecer la dificultad
+ - income debug -> Alternar el modo depuración
+ - income test -> Probar pago (dar dinero ahora)
+ - income reload -> Recargar la configuración desde el archivo
+ - income custom [cantidad] -> Establecer ingresos personalizados
+================================
+    ]]></es>
+</text>
+
+<text name="income_mod_custom_amount_set">
+    <en>Custom income amount set to €%d</en>
+    <nl>Aangepast inkomen ingesteld op €%d</nl>
+    <de>Benutzerdefinierter Einkommensbetrag eingestellt auf €%d</de>
+    <fr>Montant de revenu personnalisé défini sur €%d</fr>
+    <es>Cantidad de ingresos personalizada establecida en €%d</es>
+</text>
+
+    </l10n>
+
+    <extraSourceFiles>
+        <sourceFile filename="main.lua"/>
+    </extraSourceFiles>
+</modDesc>
