@@ -77,13 +77,12 @@ Características:
         <en>TisonK</en>
     </author>
     
-    <version>1.1.5.0</version>
+    <version>1.2.5.2</version>
     <multiplayer supported="true"/>
     
     <iconFilename>icon_FS22_IncomeMod.dds</iconFilename>
     
     <l10n>
-        <!-- Existing localization plus new keys for v1.1.0.0 -->
         <text name="income_mod_notification_title">
             <en>Income Received</en>
             <nl>Inkomen ontvangen</nl>
