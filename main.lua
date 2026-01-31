@@ -1,5 +1,5 @@
 -- =========================================================
--- FS22 Income Mod (version 1.2.5.2)
+-- FS22 Income Mod (version 1.1.5.0)
 -- =========================================================
 -- Hourly or daily income for players
 -- =========================================================
@@ -15,17 +15,17 @@ Income = {}
 Income.modName = "FS22_IncomeMod"
 Income.settings = {}
 Income.hasRegisteredSettings = false
-Income.version = "1.2.5.2"
+Income.version = "1.1.5.0"
 
 -- =====================
 -- DEFAULT CONFIGURATION
 -- =====================
 Income.DEFAULT_CONFIG = {
     enabled = true,
-    mode = "hourly",
+    mode = "hourly", -- hourly/daily
     difficulty = "normal",
     showNotification = true,
-    debugLevel = 1,
+    debugLevel = 1, -- 0=off,1=basic,2=verbose
     useCustomAmount = false,
     customAmount = 2500
 }
@@ -73,28 +73,12 @@ function Income:isServer()
     return g_currentMission ~= nil and g_currentMission:getIsServer()
 end
 
-function Income:getDynamicIncome()
-    local baseAmount = self.settings.useCustomAmount and self.settings.customAmount or (Income.DIFFICULTY_VALUES[self.settings.difficulty] or 2400)
-
-    local farmId = g_currentMission.player.farmId
-    local playerCount = 0
-    for _, player in pairs(g_currentMission.players) do
-        if player.farmId == farmId then
-            playerCount = playerCount + 1
-        end
+function Income:getMoneyAmount()
+    if self.settings.useCustomAmount then
+        return self.settings.customAmount
     end
-
-    local scaledAmount = math.floor(baseAmount * (1 + 0.1 * (playerCount - 1)))
-
-    local farm = g_farmManager.farms[farmId]
-    if farm ~= nil and farm.farmLand ~= nil then
-        local landFactor = math.min(farm.farmLand.size / 10000, 2)
-        scaledAmount = math.floor(scaledAmount * landFactor)
-    end
-
-    return scaledAmount
+    return Income.DIFFICULTY_VALUES[self.settings.difficulty] or 2400
 end
-
 
 function Income:copyTable(t)
     local r = {}
@@ -161,44 +145,6 @@ function Income:saveSettingsToXML()
     else
         self:log("Failed to create XML file: "..filePath)
     end
-end
-
--- =====================================================
--- Income Mod Tablet Interface
--- =====================================================
-function Income:openFromTablet(action)
-    -- Handle enable/disable buttons
-    if action == "enable" then
-        self.settings.enabled = true
-        self:saveSettingsToXML()
-        self:log("Income enabled via tablet", 1)
-        return {success = true, action = "enabled"}
-    elseif action == "disable" then
-        self.settings.enabled = false
-        self:saveSettingsToXML()
-        self:log("Income disabled via tablet", 1)
-        return {success = true, action = "disabled"}
-    elseif action == "status" or action == nil then
-        -- Return status info
-        local modeText = (self.settings.mode == "hourly") and "Hourly" or "Daily"
-        local amount = self:getDynamicIncome()
-        local formattedAmount = g_i18n:formatMoney(amount, 0, true, true) or ("€" .. tostring(amount))
-        local statusText = self.settings.enabled and "Enabled" or "Disabled"
-        
-        return {
-            enabled = self.settings.enabled,
-            statusText = statusText,
-            mode = self.settings.mode,
-            modeText = modeText,
-            amount = amount,
-            formattedAmount = formattedAmount,
-            difficulty = self.settings.difficulty,
-            useCustomAmount = self.settings.useCustomAmount,
-            customAmount = self.settings.customAmount
-        }
-    end
-    
-    return {error = "Unknown action"}
 end
 
 -- =====================
@@ -275,66 +221,31 @@ function Income:update(dt)
 end
 
 -- =====================
--- PAUSE/LOAD SAFE CHECK
--- =====================
-function Income:isGameActive()
-    if g_currentMission == nil or g_currentMission.environment == nil then
-        return false
-    end
-    if g_currentMission.missionInfo.isPaused or g_currentMission.player == nil then
-        return false
-    end
-    return true
-end
-
--- =====================
 -- HOURLY / DAILY
 -- =====================
 function Income:checkHourly(env)
-    if not self:isGameActive() then return end
-
-    local currentHour = env.currentHour
-    local hoursMissed = currentHour - self.lastHour
-    if hoursMissed <= 0 then return end
-
-    for i = 1, hoursMissed do
-        self.lastHour = self.lastHour + 1
+    if env.currentHour ~= self.lastHour then
+        self.lastHour = env.currentHour
+        self:saveSettingsToXML()
         self:giveMoney("hourly")
     end
-
-    self:saveSettingsToXML()
 end
-
 function Income:checkDaily(env)
-    if not self:isGameActive() then return end
-
-    local currentDay = env.currentDay
-    local daysMissed = currentDay - self.lastDay
-    if daysMissed <= 0 then return end
-
-    for i = 1, daysMissed do
-        self.lastDay = self.lastDay + 1
+    if env.currentDay ~= self.lastDay then
+        self.lastDay = env.currentDay
+        self:saveSettingsToXML()
         self:giveMoney("daily")
     end
-
-    self:saveSettingsToXML()
 end
 
 -- =====================
 -- MONEY HANDLER
 -- =====================
-function Income:getFormattedMessage(type, amount)
-    local typeText = ""
-    if type == "hourly" then
-        typeText = self:i18n("income_mod_type_hourly", "hourly income")
-    elseif type == "daily" then
-        typeText = self:i18n("income_mod_type_daily", "daily income")
-    elseif type == "test" then
-        typeText = self:i18n("income_mod_type_test", "test income")
-    end
-    
-    local formattedAmount = g_i18n:formatMoney(amount, 0, true, true)
-    return string.format(self:i18n("income_mod_message", "You received %s of %s"), typeText, formattedAmount)
+function Income:getFormattedMessage(type,amount)
+    local typeText = type=="hourly" and self:i18n("income_mod_type_hourly","hourly income") or self:i18n("income_mod_type_daily","daily income")
+    if type=="test" then typeText=self:i18n("income_mod_type_test","test income") end
+    local fAmount = g_i18n:formatMoney(amount,0,true,true)
+    return string.format(self:i18n("income_mod_message","You received %s of %s"),typeText,fAmount)
 end
 
 function Income:showNotification(type,amount)
@@ -345,7 +256,7 @@ function Income:showNotification(type,amount)
 end
 
 function Income:giveMoney(type)
-    local amount = (type=="test") and 1 or self:getDynamicIncome()
+    local amount = (type=="test") and 1 or self:getMoneyAmount()
     if g_farmManager ~= nil then
         local farmId = g_currentMission.player.farmId
         for _,farm in pairs(g_farmManager.farms) do
@@ -432,7 +343,7 @@ function Income:registerModSettings()
             },
             onChange=function(value)
                 self.settings.difficulty=value
-                self:resetCustomIncome()
+                self:resetCustomIncome() -- reset custom if player selects difficulty
                 self:saveSettingsToXML()
             end
         },
@@ -566,11 +477,6 @@ function Income:onConsoleCommand(...)
     end
     return true
 end
-
--- =====================
--- GLOBAL REGISTRATION
--- =====================
-g_IncomeMod = Income
 
 -- =====================
 -- HOOKS
