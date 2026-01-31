@@ -1,5 +1,5 @@
 -- =========================================================
--- FS22 Income Mod (version 1.2.0.1)
+-- FS22 Income Mod (version 1.2.5.2)
 -- =========================================================
 -- Hourly or daily income for players
 -- =========================================================
@@ -15,7 +15,7 @@ Income = {}
 Income.modName = "FS22_IncomeMod"
 Income.settings = {}
 Income.hasRegisteredSettings = false
-Income.version = "1.2.0.1"
+Income.version = "1.2.5.2"
 
 -- =====================
 -- DEFAULT CONFIGURATION
@@ -323,11 +323,18 @@ end
 -- =====================
 -- MONEY HANDLER
 -- =====================
-function Income:getFormattedMessage(type,amount)
-    local typeText = type=="hourly" and self:i18n("income_mod_type_hourly","hourly income") or self:i18n("income_mod_type_daily","daily income")
-    if type=="test" then typeText=self:i18n("income_mod_type_test","test income") end
-    local fAmount = g_i18n:formatMoney(amount,0,true,true)
-    return string.format(self:i18n("income_mod_message","You received %s of %s"),typeText,fAmount)
+function Income:getFormattedMessage(type, amount)
+    local typeText = ""
+    if type == "hourly" then
+        typeText = self:i18n("income_mod_type_hourly", "hourly income")
+    elseif type == "daily" then
+        typeText = self:i18n("income_mod_type_daily", "daily income")
+    elseif type == "test" then
+        typeText = self:i18n("income_mod_type_test", "test income")
+    end
+    
+    local formattedAmount = g_i18n:formatMoney(amount, 0, true, true)
+    return string.format(self:i18n("income_mod_message", "You received %s of %s"), typeText, formattedAmount)
 end
 
 function Income:showNotification(type,amount)
